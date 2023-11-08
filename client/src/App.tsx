@@ -1,16 +1,24 @@
-import React from 'react';
-import './App.css';
-import { get } from './api';
+import React, { useEffect } from "react";
+import "./App.scss";
+import { get } from "./api";
+import { IMeteor } from "../../server/types";
 
 function App() {
+  const [meteorsData, setMeteorsData] = React.useState<IMeteor[]>([]);
+  console.log("meteorsData", meteorsData)
 
-  const onClick = async () => {
-    const data = await get('');
-  }
+  const fetchData = async () => {
+    const data: IMeteor[] = await get("");
+    setMeteorsData(data ?? []);
+  };
+
+  useEffect(() => {
+    // fetchData();
+  }, []);
 
   return (
     <div className="App">
-      <button onClick={onClick}> send api request </button>
+     
     </div>
   );
 }
